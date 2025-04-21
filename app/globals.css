@@ -1,0 +1,304 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 0 72.2% 50.6%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 0 72.2% 50.6%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 11%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 11%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 0 72.2% 50.6%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 0 72.2% 50.6%;
+}
+
+/* Custom colors for dark blue theme */
+:root {
+  --navy-950: #0a1930;
+  --navy-900: #0f2344;
+  --navy-800: #162b4d;
+  --navy-700: #1d3461;
+  --navy-600: #234177;
+  --navy-500: #2c4f8f;
+  --navy-400: #3a5fa3;
+  --navy-300: #5273b3;
+  --navy-200: #7e99c9;
+  --navy-100: #b1c2e0;
+  --navy-50: #e0e7f4;
+
+  --accent-red: #e74c3c;
+  --accent-red-dark: #c0392b;
+  --accent-red-light: #f1948a;
+}
+
+body {
+  background-color: var(--navy-950);
+  color: #f9fafb;
+  font-family: var(--font-alegreya-sans-sc), "Alegreya Sans SC", sans-serif;
+  font-display: swap;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-navy-950 text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-squada-one), "Squada One Fallback", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    font-display: swap;
+  }
+}
+
+/* Hockey Jersey Font Style */
+.hockey-font {
+  font-family: var(--font-squada-one), "Squada One Fallback", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  font-display: swap;
+}
+
+/* Animated Background */
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, var(--accent-red-dark, rgba(231, 76, 60, 0.1)), transparent 80%);
+  animation: pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1.5);
+  }
+}
+
+/* Ice Particles */
+.ice-particle {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Diagonal Stripes */
+.diagonal-stripes {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(231, 76, 60, 0.1),
+    rgba(231, 76, 60, 0.1) 10px,
+    rgba(231, 76, 60, 0.2) 10px,
+    rgba(231, 76, 60, 0.2) 20px
+  );
+  animation: moveStripes 20s linear infinite;
+}
+
+@keyframes moveStripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+/* Glow Effect */
+.text-glow {
+  text-shadow: 0 0 10px rgba(231, 76, 60, 0.7), 0 0 20px rgba(231, 76, 60, 0.5), 0 0 30px rgba(231, 76, 60, 0.3);
+}
+
+.box-glow {
+  box-shadow: 0 0 15px rgba(231, 76, 60, 0.7), 0 0 30px rgba(231, 76, 60, 0.4);
+}
+
+/* Puck Animation */
+.puck {
+  width: 20px;
+  height: 20px;
+  background-color: #000;
+  border-radius: 50%;
+  position: absolute;
+  animation: puckSlide 10s ease-in-out infinite alternate;
+}
+
+@keyframes puckSlide {
+  0% {
+    transform: translateX(-100px) translateY(20px) rotate(0deg);
+  }
+  50% {
+    transform: translateX(100px) translateY(-20px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(-100px) translateY(20px) rotate(360deg);
+  }
+}
+
+/* Ice Splash */
+.ice-splash {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  animation: splash 1s ease-out forwards;
+}
+
+@keyframes splash {
+  0% {
+    opacity: 0.8;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Shine effect */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  animation: shine 6s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(30deg);
+  }
+  20%,
+  100% {
+    transform: translateX(100%) rotate(30deg);
+  }
+}
+
+/* Ensure text is visible during font loading */
+.font-loading-fix {
+  font-family: var(--font-alegreya-sans-sc), "Alegreya Sans SC Fallback", Arial, sans-serif;
+  font-display: swap;
+}
+
+.heading-loading-fix {
+  font-family: var(--font-squada-one), "Squada One Fallback", "Impact", "Arial Black", sans-serif;
+  font-display: swap;
+}
+
+/* Dark blue theme background colors */
+.bg-navy-950 {
+  background-color: var(--navy-950);
+}
+
+.bg-navy-900 {
+  background-color: var(--navy-900);
+}
+
+.bg-navy-800 {
+  background-color: var(--navy-800);
+}
+
+.bg-navy-700 {
+  background-color: var(--navy-700);
+}
+
+.from-navy-800 {
+  --tw-gradient-from: var(--navy-800);
+}
+
+.to-navy-950 {
+  --tw-gradient-to: var(--navy-950);
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+.no-fouc {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.1s ease-in;
+}
+
+html.loading * {
+  visibility: hidden;
+}
+
+/* Ensure content is visible even before JS loads */
+.content-visible {
+  content-visibility: auto;
+}
+
+/* Ensure text remains visible during webfont load */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
