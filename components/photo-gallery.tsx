@@ -140,10 +140,8 @@ export default function PhotoGallery() {
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-              <p className="text-white font-medium font-squada">{photo.caption}</p>
-              <p className="text-gray-300 text-sm font-alegreya">{photo.year}</p>
-            </div>
+            {/* Убираем информацию на фото, оставляем только эффект затемнения при наведении */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </motion.div>
         ))}
       </div>
@@ -180,10 +178,7 @@ export default function PhotoGallery() {
                 className="w-full rounded-lg shadow-2xl"
               />
 
-              <div className="mt-4 bg-navy-800/80 p-4 rounded-lg">
-                <h3 className="text-xl font-squada text-white">{selectedPhoto.caption}</h3>
-                <p className="text-gray-300 font-alegreya">{selectedPhoto.year}</p>
-              </div>
+              {/* Убираем информацию под фото */}
             </motion.div>
           </motion.div>
         )}

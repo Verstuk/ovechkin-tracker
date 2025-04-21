@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Share2, RefreshCw, Calendar, Trophy, Twitter, Facebook } from "lucide-react"
+import { Share2, RefreshCw, Calendar, Trophy } from "lucide-react"
 import GoalCounter from "./goal-counter"
 import ProgressIndicator from "./progress-indicator"
 import StatsSection from "./stats-section"
@@ -16,6 +16,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import MainNavigation from "./main-navigation"
 import AnimatedBackground from "./animated-background"
+import ShareModal from "./share-modal"
 
 interface PlayerStats {
   featuredStats: {
@@ -92,6 +93,7 @@ export default function OvechkinTracker() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false)
   const { toast } = useToast()
   const { scrollYProgress } = useScroll()
 
@@ -203,6 +205,11 @@ export default function OvechkinTracker() {
       ),
     },
   ]
+
+  // Функция для открытия модального окна шаринга
+  const handleShare = () => {
+    setIsShareModalOpen(true)
+  }
 
   return (
     <div className="relative no-fouc">
@@ -542,52 +549,9 @@ export default function OvechkinTracker() {
                 variant="outline"
                 size="lg"
                 className="flex items-center gap-2 border-accent-red text-accent-red hover:bg-accent-red hover:text-white shine font-alegreya"
-                onClick={() => {
-                  if (navigator.share) {
-                    navigator.share({
-                      title: "Ovechkin Goal Tracker",
-                      text: `Alex Ovechkin has scored ${currentGoals} goals. ${goalsToGo} more to 1000!`,
-                      url: window.location.href,
-                    })
-                  } else {
-                    navigator.clipboard.writeText(window.location.href)
-                    toast({
-                      title: "Link Copied",
-                      description: "Link copied to clipboard!",
-                      duration: 3000,
-                    })
-                  }
-                }}
+                onClick={handleShare}
               >
                 <Share2 size={18} /> Share
-              </Button>
-
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full w-12 h-12 bg-blue-600/20 hover:bg-blue-600/30 border-blue-600/30"
-                onClick={() =>
-                  window.open(
-                    `https://twitter.com/intent/tweet?text=Alex Ovechkin has scored ${currentGoals} goals. ${goalsToGo} more to 1000!&url=${encodeURIComponent(window.location.href)}`,
-                    "_blank",
-                  )
-                }
-              >
-                <Twitter size={18} />
-              </Button>
-
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full w-12 h-12 bg-blue-800/20 hover:bg-blue-800/30 border-blue-800/30"
-                onClick={() =>
-                  window.open(
-                    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`,
-                    "_blank",
-                  )
-                }
-              >
-                <Facebook size={18} />
               </Button>
             </div>
           </div>
@@ -597,32 +561,11 @@ export default function OvechkinTracker() {
       {/* Footer */}
       <footer id="footer-section" className="bg-navy-950 border-t border-navy-700 py-8">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h4 className="text-xl font-bold mb-4 font-squada heading-loading-fix">Archive</h4>
-              <ul className="space-y-2 text-gray-300 font-alegreya font-loading-fix">
-                <li>2023-24 Season</li>
-                <li>2022-23 Season</li>
-                <li>2021-22 Season</li>
-                <li>Career Highlights</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold mb-4 font-squada heading-loading-fix">Contacts</h4>
-              <ul className="space-y-2 text-gray-300 font-alegreya font-loading-fix">
-                <li>info@ovitracker.com</li>
-                <li>Media Inquiries: press@ovitracker.com</li>
-                <li>+1 (202) 555-0188</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold mb-4 font-squada heading-loading-fix">Location</h4>
-              <p className="text-gray-300 mb-2 font-alegreya font-loading-fix">Capital One Arena</p>
-              <p className="text-gray-300 font-alegreya font-loading-fix">Washington, DC</p>
-            </div>
-          </div>
+        <p className="mt-2 text-center">
+              Contacts for sponsors: ovechkin.tracker@gmail.com
+            </p>
           <div className="mt-8 pt-6 border-t border-navy-700 text-center text-gray-400 text-sm font-alegreya font-loading-fix">
-            <p>© {new Date().getFullYear()} Ovechkin Goal Tracker. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Mirniy Pixel. Ovechkin Goal Tracker. All rights reserved.</p>
             <p className="mt-2">
               Data provided by NHL API. This site is not affiliated with the NHL or Washington Capitals.
             </p>
@@ -635,6 +578,15 @@ export default function OvechkinTracker() {
           </div>
         </div>
       </footer>
+
+      {/* Share Modal */}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        title={`Alex Ovechkin has scored ${currentGoals} goals. ${goalsToGo} more to 1000!`}
+        text={`Alex Ovechkin has scored ${currentGoals} goals. ${goalsToGo} more to 1000!`}
+        url={typeof window !== "undefined" ? window.location.href : "https://ovechkin-tracker.vercel.app/"}
+      />
 
       <Toaster />
     </div>
