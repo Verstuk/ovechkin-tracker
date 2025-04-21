@@ -130,8 +130,8 @@ export default function StatsSection({ stats }: StatsProps) {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.9 + index * 0.1, duration: 0.3 }}
               >
-                <div className="mr-4 min-w-[80px] text-[#e74c3c] font-semibold font-squada">{highlight.year}</div>
-                <div className="font-alegreya">{highlight.text}</div>
+                <div className="mr-4 min-w-[80px] text-[#e74c3c] font-semibold font-squada text-2xl">{highlight.year}</div>
+                <div className="font-alegreya text-xl">{highlight.text}</div>
               </motion.li>
             ))}
           </ul>
